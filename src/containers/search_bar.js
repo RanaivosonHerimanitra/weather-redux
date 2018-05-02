@@ -7,6 +7,7 @@ class SearchBar extends Component {
     constructor(props) {
         super(props)
         this.state = {term:""}
+        this.onFormSubmit=this.onFormSubmit.bind(this)
     }
     onInputChange = (event) => {
         console.log(event.target.value)
@@ -15,6 +16,8 @@ class SearchBar extends Component {
     onFormSubmit = (event) => {
         event.preventDefault()
         //here to fetch data
+        this.props.fetchWeather(this.state.term)
+        this.setState({term:""})
     }
     render() {
         return (
@@ -33,6 +36,7 @@ class SearchBar extends Component {
     }
 }
 function  mapDispatchToProps  (dispatch)  {
+    //action fetchWeather becomes available to the component
     return bindActionCreators({fetchWeather},dispatch)
 }
 export default connect(null,mapDispatchToProps)(SearchBar)
