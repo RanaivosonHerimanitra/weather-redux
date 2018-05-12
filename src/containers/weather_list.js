@@ -3,20 +3,26 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from "redux"
 
 import Plot from 'react-plotly.js';
-import {Sparklines,SparklinesLine} from 'react-sparklines'
+import Chart from '../components/chart'
+
 class WeatherList extends Component {
     renderWeather(cityData) {
         const name =cityData.city.name
         const temperature = cityData.list.map(x=>x.main.temp)
         const humid = cityData.list.map(x=>x.main.humidity)
-        console.log(temperature)
+        const pressure = cityData.list.map(x=>x.main.pressure)
+        
         return (
         <tr key={name}>
             <td>{name}</td>
             <td>
-                <Sparklines width={180} height={120} data={temperature}>
-                   <SparklinesLine color="red" />
-                </Sparklines>
+                <Chart color="red" data={temperature}/>   
+            </td>
+      <td>
+                <Chart color="orange" data={humid}/>   
+      </td>
+      <td>
+                <Chart color="blue" data={pressure}/>   
       </td>
         </tr>)  
     }
